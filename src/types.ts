@@ -10,3 +10,12 @@ export interface ProductProps {
     count: number;
   };
 }
+
+export interface editedProductProps {
+  id: number;
+  image: string;
+  title: string;
+  price: number;
+  description: string;
+  category?: string;
+}

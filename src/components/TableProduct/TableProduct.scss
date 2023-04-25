@@ -1,5 +1,6 @@
 .table__product {
     text-align: center;
+    position: relative;
 
     .product__image {
         width: 50px;
@@ -8,25 +9,25 @@
             width: 100%;
         }
        }
-
-       .product__actions {
-
-        button {
-            border: none;
-            background-color: transparent;
-            font-size: 1.3rem;
-            padding: 5px 10px;
-            text-align: center;
-            transition: .3s ease-in;
-            cursor: pointer;
-        }
-
-        &-edit:hover {
-            color: greenyellow;
-        }
-
-        &-delete:hover {
-            color: rgb(202, 84, 84);
-        }
-       }
  }
+
+ .product__actions {
+    text-align: center;
+    button {
+        border: none;
+        background-color: transparent;
+        font-size: 1.3rem;
+        padding: 5px 10px;
+        text-align: center;
+        transition: .3s ease-in;
+        cursor: pointer;
+    }
+
+    &-edit:hover {
+        color: greenyellow;
+    }
+
+    &-delete:hover {
+        color: rgb(202, 84, 84);
+    }
+   }

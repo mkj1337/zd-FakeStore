@@ -1,5 +1,5 @@
 import { useState, useEffect, createContext, useContext } from 'react';
-import { ProductProps } from '../types';
+import { ProductProps, editedProductProps } from '../types';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
@@ -9,8 +9,8 @@ type ProductContextProviderProps = {
 
 interface ProductContextProps {
   deleteProduct: (id: number) => void;
-  //   createProduct: () => ProductProps;
-//   editProduct: (id: number) => void;
+  // createProduct: () => any;
+  updateProduct: (editedProduct: editedProductProps) => void;
   reloadProducts: () => void;
   isLoading: boolean;
   products: ProductProps[];
@@ -65,9 +65,40 @@ export const ProductContextProvider = ({
     }
   };
 
-  const editProduct = async (id: number) => {
-    
-  }
+  const updateProduct = async (editedProduct: editedProductProps) => {
+    try {
+      const { data } = await axios.put(
+        `https://fakestoreapi.com/products/${editedProduct.id}`,
+        {
+          editedProduct,
+        }
+      );
+
+      setProducts((prevProducts) => {
+        return prevProducts.map((prevProduct) => {
+          if (prevProduct.id === data.id) {
+            return { ...prevProduct, ...editedProduct };
+          } else {
+            return prevProduct;
+          }
+        });
+      });
+      toast.success('product has been updated!');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const createProduct = async (productDetails: any) => {
+    try {
+      const { data } = await axios.post(`https://fakestoreapi.com/products`, {
+        productDetails,
+      });
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const reloadProducts = () => {
     localStorage.removeItem('products');
@@ -79,7 +110,7 @@ export const ProductContextProvider = ({
       value={{
         deleteProduct,
         // createProduct,
-        // editProduct,
+        updateProduct,
         reloadProducts,
         isLoading,
         products,

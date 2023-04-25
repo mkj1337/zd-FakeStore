@@ -7,6 +7,7 @@ import './Admin.scss';
 
 // icons
 import { FiRefreshCw } from 'react-icons/fi';
+import { IoMdAdd } from 'react-icons/io';
 
 // components
 import { TableProduct } from '../../components/TableProduct/TableProduct';
@@ -15,13 +16,20 @@ export const Admin = () => {
   const [search, setSearch] = useState<string>('');
   const [clicks, setClicks] = useState<number>(0);
   const headRef = useRef<HTMLTableSectionElement>(null);
+  const [isAddActive, setIsAddActive] = useState<boolean>(false);
 
-  const { products, deleteProduct, reloadProducts, isLoading } =
-    useProductContext();
+  const {
+    products,
+    deleteProduct,
+    updateProduct,
+    // createProduct,
+    reloadProducts,
+    isLoading,
+  } = useProductContext();
 
   const searchProducts = (products: ProductProps[]) => {
     if (search.length) {
-      return products.filter((product: any) =>
+      return products.filter((product: ProductProps) =>
         product['title'].toLowerCase().includes(search)
       );
     }
@@ -46,9 +54,11 @@ export const Admin = () => {
     }
   };
 
-
   return (
     <div className="admin">
+      <button className="product__add">
+        <IoMdAdd />
+      </button>
       <h1 className="admin__title">Admin Dashboard</h1>
       <button className="reload__products" onClick={reloadProducts}>
         <FiRefreshCw />
@@ -59,7 +69,6 @@ export const Admin = () => {
         placeholder="search by title"
         onChange={(e) => setSearch(e.target.value.toLowerCase())}
       />
-
       <table className="product__table">
         <thead ref={headRef}>
           <tr>
@@ -82,7 +91,11 @@ export const Admin = () => {
               <TableProduct
                 key={product.id}
                 product={product}
+                setAddIsActive={setIsAddActive}
+                isAddActive={isAddActive}
                 deleteProduct={deleteProduct}
+                updateProduct={updateProduct}
+                // createProduct={createProduct}
               />
             ))}
         </tbody>

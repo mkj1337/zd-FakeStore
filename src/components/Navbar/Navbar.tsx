@@ -52,11 +52,6 @@ export const Navbar = () => {
               </NavLink>
             </li>
             <li className="nav__menu-item">
-              <NavLink to="/store" onClick={handleClick}>
-                Store
-              </NavLink>
-            </li>
-            <li className="nav__menu-item">
               <NavLink to="/admin" onClick={handleClick}>
                 Admin
               </NavLink>

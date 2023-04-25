@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // pages
 import { Home } from './pages/Home/Home';
-import { Store } from './pages/Store/Store';
 import { Admin } from './pages/Admin/Admin';
 
 // components
@@ -45,10 +44,6 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home />,
-      },
-      {
-        path: '/store',
-        element: <Store />,
       },
       {
         path: '/admin',

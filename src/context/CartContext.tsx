@@ -5,6 +5,14 @@ type CartContextProviderProps = {
   children: React.ReactNode;
 };
 
+type increaseQuantityProps = {
+  id: number;
+  image: string;
+  title: string;
+  price: number;
+  description: string;
+};
+
 type CartProduct = {
   id: number;
   quantity: number;
@@ -21,13 +29,7 @@ type CardContextProps = {
     title,
     price,
     description,
-  }: {
-    id: number;
-    image: string;
-    title: string;
-    price: number;
-    description: string;
-  }) => void;
+  }: increaseQuantityProps) => void;
   decreaseQuantity: (id: number) => void;
   removeProduct: (id: number) => void;
   getProductQuantity: (id: number) => number;

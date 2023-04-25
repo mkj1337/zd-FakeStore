@@ -11,7 +11,7 @@ export const Banner = () => {
     <header className="banner">
       <div className="banner__wrapper">
         <div className="banner__info">
-          <Link to="/store">
+          <Link to="/">
             <button className="banner__info-btn">
               <span>Shop now</span>
               <BsArrowRight />
