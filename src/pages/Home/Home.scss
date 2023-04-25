@@ -1,0 +1,18 @@
+.home__main {
+    padding: 0px 20px;
+
+    .product__container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 25px;
+    }
+}
+
+@media (min-width: 710px){
+    .home__main {
+        .product__container {
+            gap: 75px!important;
+        }
+    }
+}

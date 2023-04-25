@@ -1,0 +1,47 @@
+.banner {
+    width: 100%;
+    padding: 20px 20px 0 20px;
+
+    .banner__wrapper{
+        position: relative;
+        height: 70vh;
+        background: url('https://images.unsplash.com/photo-1470611398812-f32f4afdeba0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+        background-position: top;
+        background-repeat: no-repeat;
+        background-size: cover;
+
+        .banner__info {
+            position: absolute;
+            bottom: 10%;
+            left: 5%;
+
+            &-btn {
+                outline: none;
+                display: flex;
+                align-items: center;   
+                justify-content: center;      
+                gap: 10px;
+                width: 210px;
+                padding: 8px 25px;
+                font-size: 1.2rem;
+                background-color: transparent;
+                border: 2px solid #fff;
+                color: #fff;
+                text-transform: uppercase;
+                transition: .3s ease;
+                cursor: pointer;
+              
+                svg {
+                    font-size: 1.6rem;
+                }
+
+                &:hover {
+                    gap: 15px;
+
+                    backdrop-filter: blur(3px);
+                    -webkit-backdrop-filter: blur(3px);
+                }
+            }
+        }
+    }
+}

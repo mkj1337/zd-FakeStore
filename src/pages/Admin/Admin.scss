@@ -1,0 +1,66 @@
+.admin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    width: 100%;
+    padding: 20px; 
+    position: relative;
+
+    &__title {
+        font-size: 2.5rem;
+    }
+
+    .reload__products {
+        font-size: 1.2rem;
+        background-color: transparent;
+        outline: none;
+        border: none;
+        transition: .3s ease-in;
+        cursor: pointer;
+
+        &:hover {
+            color: greenyellow;
+        }
+    }
+
+    .search__bar {
+        width: 300px;
+        padding:10px 20px;
+        outline: none;
+    }
+
+    .product__table {
+        width: 80%;
+        border-collapse: collapse;
+       
+        
+        thead {
+            color: #fff;
+            background-color: rgba(68, 88, 88, 0.767);
+           
+            tr {
+                th {
+                    padding: 10px;
+                    cursor: pointer;
+                }
+            };
+        }
+
+    }
+}
+
+
+@media (min-width: 768px) {
+    .product-table {
+        width: 90%;
+
+        tbody {
+            tr{
+                td::nth-child(4){
+                
+                }
+            }
+        }
+    }
+}

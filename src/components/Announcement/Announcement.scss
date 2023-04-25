@@ -1,0 +1,22 @@
+.announcement{
+    display: none;
+    width: 100%;
+    background-color: rgba(250, 88, 88, 0.74);
+    
+    &__wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 600;
+        letter-spacing: .1rem;
+        color: #fff;
+    }
+}
+
+@media (min-width: 768px) {
+    .announcement{
+        display: block;
+        z-index: 1000;
+
+    }
+}
