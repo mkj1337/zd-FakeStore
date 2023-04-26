@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 // icons
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
 
-type FaqContentProps = {
+interface FaqContentProps {
   index: number;
   isActiveFaq: number | null;
   setIsActiveFaq: React.Dispatch<React.SetStateAction<number | null>>;

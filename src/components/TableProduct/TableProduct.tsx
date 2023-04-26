@@ -9,13 +9,13 @@ import './TableProduct.scss';
 import { AiOutlineEdit } from 'react-icons/ai';
 import { GoTrashcan } from 'react-icons/go';
 
-type TableProductProps = {
+interface TableProductProps {
   product: ProductProps;
   setAddIsActive: React.Dispatch<React.SetStateAction<boolean>>;
   isAddActive: boolean;
   deleteProduct: (id: number) => void;
   updateProduct: (editedProduct: editedProductProps) => void;
-};
+}
 
 export const TableProduct = ({
   product,

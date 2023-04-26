@@ -10,11 +10,11 @@ import './ProductModal.scss';
 import { VscChromeClose } from 'react-icons/vsc';
 import { GoTrashcan } from 'react-icons/go';
 
-type ProductModal = {
+interface ProductModal {
   isModalActive: boolean;
   setIsModalActive: React.Dispatch<React.SetStateAction<boolean>>;
   product: ProductProps;
-};
+}
 
 export const ProductModal = ({
   isModalActive,

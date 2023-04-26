@@ -1,9 +1,6 @@
 import { ChangeEvent, useRef, useState } from 'react';
 import { ProductProps, editedProductProps } from '../../types';
 
-// styles
-import './EditProduct.scss';
-
 // icons
 import { VscChromeClose } from 'react-icons/vsc';
 import { FiSave } from 'react-icons/fi';

@@ -57,7 +57,10 @@ export const Admin = () => {
 
   return (
     <div className="admin">
-      <button className="product__add" onClick={() => setIsAddActive(!isAddActive)}>
+      <button
+        className="product__add"
+        onClick={() => setIsAddActive(!isAddActive)}
+      >
         <IoMdAdd />
       </button>
       <h1 className="admin__title">Admin Dashboard</h1>
@@ -83,11 +86,10 @@ export const Admin = () => {
         </thead>
         <tbody>
           {isAddActive && (
-  
-              <AddProduct
-                setIsAddActive={setIsAddActive}
-                createProduct={createProduct}
-              />
+            <AddProduct
+              setIsAddActive={setIsAddActive}
+              createProduct={createProduct}
+            />
           )}
           {isLoading && (
             <tr>
