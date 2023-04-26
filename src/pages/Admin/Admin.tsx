@@ -11,6 +11,7 @@ import { IoMdAdd } from 'react-icons/io';
 
 // components
 import { TableProduct } from '../../components/TableProduct/TableProduct';
+import { AddProduct } from '../../components/AddProduct/AddProduct';
 
 export const Admin = () => {
   const [search, setSearch] = useState<string>('');
@@ -22,7 +23,7 @@ export const Admin = () => {
     products,
     deleteProduct,
     updateProduct,
-    // createProduct,
+    createProduct,
     reloadProducts,
     isLoading,
   } = useProductContext();
@@ -56,7 +57,7 @@ export const Admin = () => {
 
   return (
     <div className="admin">
-      <button className="product__add">
+      <button className="product__add" onClick={() => setIsAddActive(!isAddActive)}>
         <IoMdAdd />
       </button>
       <h1 className="admin__title">Admin Dashboard</h1>
@@ -81,6 +82,13 @@ export const Admin = () => {
           </tr>
         </thead>
         <tbody>
+          {isAddActive && (
+  
+              <AddProduct
+                setIsAddActive={setIsAddActive}
+                createProduct={createProduct}
+              />
+          )}
           {isLoading && (
             <tr>
               <td>loading...</td>
@@ -95,7 +103,6 @@ export const Admin = () => {
                 isAddActive={isAddActive}
                 deleteProduct={deleteProduct}
                 updateProduct={updateProduct}
-                // createProduct={createProduct}
               />
             ))}
         </tbody>

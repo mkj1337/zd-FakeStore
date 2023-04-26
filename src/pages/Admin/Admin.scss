@@ -68,20 +68,33 @@
             };
         }
 
-    }
-}
-
-
-@media (min-width: 768px) {
-    .product-table {
-        width: 90%;
-
         tbody {
-            tr{
-                td::nth-child(4){
-                
+            padding: 20px;
+            tr {
+                  
+             .product__image {
+                width: 50px;
+                 label {
+                 cursor: pointer;
+
+                img {
+                 width: 100%;
                 }
+          
             }
+          #placeholder {
+              display: none;
+          }
+      }
+      
+      td {
+        text-align: center;
+        padding: 10px;
+    }
+    }
+        
         }
     }
 }
+
+

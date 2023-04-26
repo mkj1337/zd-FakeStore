@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { EditModal } from '../Edit/Edit';
-import { ProductProps, editedProductProps } from '../../types';
+import {
+  ProductProps,
+  addedProductProps,
+  editedProductProps,
+} from '../../types';
 
 // styles
 import './TableProduct.scss';
@@ -8,7 +12,6 @@ import './TableProduct.scss';
 // icons
 import { AiOutlineEdit } from 'react-icons/ai';
 import { GoTrashcan } from 'react-icons/go';
-// import { AddProduct } from '../AddProduct/AddProduct';
 
 type TableProductProps = {
   product: ProductProps;
@@ -16,16 +19,12 @@ type TableProductProps = {
   isAddActive: boolean;
   deleteProduct: (id: number) => void;
   updateProduct: (editedProduct: editedProductProps) => void;
-  // createProduct: () => ProductProps;
 };
 
 export const TableProduct = ({
   product,
-  setAddIsActive,
-  isAddActive,
   deleteProduct,
   updateProduct,
-  // createProduct,
 }: TableProductProps) => {
   const [isEdited, setIsEdited] = useState<boolean>(false);
   const [expandDesc, setExpandDesc] = useState<boolean>(false);
@@ -33,7 +32,6 @@ export const TableProduct = ({
 
   return (
     <>
-      {/* {isAddActive && <AddProduct setAddIsActive={setAddIsActive} createProduct={createProduct}/>} */}
       {isEdited ? (
         <tr className="table__product">
           <EditModal

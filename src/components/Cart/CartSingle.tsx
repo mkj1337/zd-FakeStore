@@ -43,7 +43,7 @@ export const CartSingle = ({ product }: SingleProductProps) => {
               {product.title.slice(0, 20)}
             </span>
             <div className="single__info-price">
-              {product.price}$ x {getProductQuantity(product.id)} ={' '}
+              {Number(product.price).toFixed(2)}$ x {getProductQuantity(product.id)} ={' '}
               {(product.price * getProductQuantity(product.id)).toFixed(2)}$
             </div>
           </div>

@@ -17,5 +17,12 @@ export interface editedProductProps {
   title: string;
   price: number;
   description: string;
-  category?: string;
+}
+
+export interface addedProductProps {
+  image: string;
+  title: string;
+  price: number;
+  description: string;
+  category: string;
 }

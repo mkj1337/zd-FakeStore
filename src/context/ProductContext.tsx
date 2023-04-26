@@ -1,5 +1,5 @@
 import { useState, useEffect, createContext, useContext } from 'react';
-import { ProductProps, editedProductProps } from '../types';
+import { ProductProps, addedProductProps, editedProductProps } from '../types';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
@@ -9,7 +9,7 @@ type ProductContextProviderProps = {
 
 interface ProductContextProps {
   deleteProduct: (id: number) => void;
-  // createProduct: () => any;
+  createProduct: (addedProduct: addedProductProps) => void;
   updateProduct: (editedProduct: editedProductProps) => void;
   reloadProducts: () => void;
   isLoading: boolean;
@@ -58,7 +58,8 @@ export const ProductContextProvider = ({
       const { data } = await axios.delete(
         `https://fakestoreapi.com/products/${id}`
       );
-      setProducts(products.filter((product) => product.id !== data.id));
+      console.log(data);
+      setProducts(products.filter((product) => product.id !== id));
       toast.info('Product has been deleted from the database!');
     } catch (err) {
       console.log(err);
@@ -73,10 +74,10 @@ export const ProductContextProvider = ({
           editedProduct,
         }
       );
-
+      console.log(data);
       setProducts((prevProducts) => {
         return prevProducts.map((prevProduct) => {
-          if (prevProduct.id === data.id) {
+          if (prevProduct.id === editedProduct.id) {
             return { ...prevProduct, ...editedProduct };
           } else {
             return prevProduct;
@@ -89,12 +90,17 @@ export const ProductContextProvider = ({
     }
   };
 
-  const createProduct = async (productDetails: any) => {
+  const createProduct = async (addedProduct: addedProductProps) => {
     try {
       const { data } = await axios.post(`https://fakestoreapi.com/products`, {
-        productDetails,
+        addedProduct,
       });
       console.log(data);
+      setProducts((prevProducts) => [
+        ...prevProducts,
+        { id: products[products.length - 1].id + 1, ...addedProduct },
+      ]);
+      toast.success('product has been added to the databese!');
     } catch (err) {
       console.log(err);
     }
@@ -102,14 +108,15 @@ export const ProductContextProvider = ({
 
   const reloadProducts = () => {
     localStorage.removeItem('products');
-    console.log('refresh the page');
+    window.location.reload();
   };
+
 
   return (
     <ProductContext.Provider
       value={{
         deleteProduct,
-        // createProduct,
+        createProduct,
         updateProduct,
         reloadProducts,
         isLoading,

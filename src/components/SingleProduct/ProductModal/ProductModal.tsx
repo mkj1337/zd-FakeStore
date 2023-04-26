@@ -61,7 +61,9 @@ export const ProductModal = ({
               <img src={product.image} alt="" />
             </div>
             <div className="product__info">
-              <span className="product__info-price">{product.price}$</span>
+              <span className="product__info-price">
+                {Number(product.price).toFixed(2)}$
+              </span>
               {getProductQuantity(product.id) === 0 ? (
                 <button className="product__info-btn" onClick={handleAdd}>
                   ADD TO CART

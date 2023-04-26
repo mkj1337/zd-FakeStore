@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ChangeEvent, useRef, useState } from 'react';
 import { ProductProps, editedProductProps } from '../../types';
 
 // styles
@@ -26,6 +26,8 @@ export const EditModal = ({
     price: product.price,
     description: product.description,
   });
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [preview, setPreview] = useState<string | null>(null);
 
   const changeHandler = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -44,11 +46,28 @@ export const EditModal = ({
     }
   };
 
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files !== null) {
+      const file = e.target.files[0];
+      const url = URL.createObjectURL(file);
+      setPreview(url);
+    }
+  };
+
   return (
     <>
       <td>{product.id}</td>
       <td className="product__image">
-        <img src={product.image} alt={product.title} />
+        <label htmlFor="placeholder">
+          <img src={preview ? preview : product.image} alt={product.title} />
+        </label>
+        <input
+          type="file"
+          id="placeholder"
+          accept="images/*"
+          ref={inputRef}
+          onChange={handleChange}
+        />
       </td>
       <td style={{ cursor: 'pointer' }}>
         <input

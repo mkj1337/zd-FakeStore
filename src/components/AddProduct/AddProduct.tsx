@@ -1,91 +1,115 @@
-export {};
-// import { ProductProps, editedProductProps } from '../../types';
-// import { useState } from 'react';
+import { addedProductProps, editedProductProps } from '../../types';
+import { ChangeEvent, useRef, useState } from 'react';
 
-// // icons
-// import { VscChromeClose } from 'react-icons/vsc';
-// import { FiSave } from 'react-icons/fi';
+// styles
+import './AddProduct.scss';
 
-// interface AddProductProps {
-//   setAddIsActive: React.Dispatch<React.SetStateAction<boolean>>;
-//   createProduct: () => any;
-// }
+// icons
+import { VscChromeClose } from 'react-icons/vsc';
+import { FiSave } from 'react-icons/fi';
 
-// export const AddProduct = ({
-//   setAddIsActive,
-//   createProduct,
-// }: AddProductProps) => {
-//   const [addedProduct, setAddedProduct] = useState({
-//     id: '',
-//     image: '',
-//     title: '',
-//     price: '',
-//     description: '',
-//   });
+interface AddProductProps {
+  setIsAddActive: React.Dispatch<React.SetStateAction<boolean>>;
+  createProduct: (addedProduct: addedProductProps) => void;
+}
 
-//   const changeHandler = (
-//     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-//   ) => {
-//     setAddedProduct({ ...addedProduct, [e.target.name]: e.target.value });
-//   };
+export const AddProduct = ({
+  setIsAddActive,
+  createProduct,
+}: AddProductProps) => {
+  const [addedProduct, setAddedProduct] = useState({
+    image: 'https://picsum.photos/200/300',
+    title: '',
+    price: 0,
+    description: '',
+    category: '',
+  });
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [preview, setPreview] = useState<string | null>(null);
 
-//   const handleCreate = (addedProduct: editedProductProps) => {
-//     if (
-//       addedProduct.title.length > 0 &&
-//       addedProduct.description.length > 0 &&
-//       addedProduct.price > 0
-//     ) {
-//       createProduct(addedProduct);
-//       setAddIsActive(false);
-//     }
-//   };
+  const changeHandler = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setAddedProduct({ ...addedProduct, [e.target.name]: e.target.value });
+  };
 
-//   return (
-//     <>
-//       <td>{addedProduct.id}</td>
-//       <td className="product__image">
-//         <img src={addedProduct.image} alt={addedProduct.title} />
-//       </td>
-//       <td style={{ cursor: 'pointer' }}>
-//         <input
-//           type="text"
-//           name="title"
-//           value={addedProduct.title}
-//           onChange={(e) => changeHandler(e)}
-//           required
-//         />
-//       </td>
-//       <td>
-//         <input
-//           type="text"
-//           name="price"
-//           value={addedProduct.price}
-//           onChange={(e) => changeHandler(e)}
-//           required
-//         />
-//       </td>
-//       <td style={{ cursor: 'pointer' }}>
-//         <textarea
-//           name="description"
-//           value={addedProduct.description}
-//           onChange={(e) => changeHandler(e)}
-//           required
-//         ></textarea>
-//       </td>
-//       <td className="product__actions">
-//         <button
-//           className="product__actions-close"
-//           onClick={() => setAddIsActive(false)}
-//         >
-//           <VscChromeClose />
-//         </button>
-//         <button
-//           className="product__actions-update"
-//           onClick={() => handleCreate(editedProduct)}
-//         >
-//           <FiSave />
-//         </button>
-//       </td>
-//     </>
-//   );
-// };
+  const handleCreate = (addedProduct: addedProductProps) => {
+    if (
+      addedProduct.title.length > 0 &&
+      addedProduct.description.length > 0 &&
+      addedProduct.price > 0
+    ) {
+      createProduct(addedProduct);
+      setIsAddActive(false);
+    }
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files !== null) {
+      const file = e.target.files[0];
+      const url = URL.createObjectURL(file);
+      setPreview(url);
+    }
+  };
+
+  return (
+    <tr>
+      <td>#</td>
+      <td className="product__image">
+        <label htmlFor="placeholder">
+          <img
+            src={preview ? preview : 'https://placehold.co/600x400'}
+            alt={addedProduct.title}
+          />
+        </label>
+        <input
+          type="file"
+          id="placeholder"
+          accept="images/*"
+          ref={inputRef}
+          onChange={handleChange}
+        />
+      </td>
+      <td style={{ cursor: 'pointer' }}>
+        <input
+          type="text"
+          name="title"
+          value={addedProduct.title}
+          onChange={(e) => changeHandler(e)}
+          required
+        />
+      </td>
+      <td>
+        <input
+          type="text"
+          name="price"
+          value={addedProduct.price}
+          onChange={(e) => changeHandler(e)}
+          required
+        />
+      </td>
+      <td style={{ cursor: 'pointer' }}>
+        <textarea
+          name="description"
+          value={addedProduct.description}
+          onChange={(e) => changeHandler(e)}
+          required
+        ></textarea>
+      </td>
+      <td className="product__actions">
+        <button
+          className="product__actions-close"
+          onClick={() => setIsAddActive(false)}
+        >
+          <VscChromeClose />
+        </button>
+        <button
+          className="product__actions-update"
+          onClick={() => handleCreate(addedProduct)}
+        >
+          <FiSave />
+        </button>
+      </td>
+    </tr>
+  );
+};

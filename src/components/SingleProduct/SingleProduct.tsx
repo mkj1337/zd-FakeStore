@@ -52,7 +52,9 @@ export const SingleProduct = ({ product }: SingleProductProps) => {
           <h2 className="single__info-title">{product.title.slice(0, 22)}</h2>
 
           <div className="info__bottom">
-            <span className="info__bottom-price">{product.price}$</span>
+            <span className="info__bottom-price">
+              {Number(product.price).toFixed(2)}$
+            </span>
             <button className="info__bottom-btn" onClick={handleAdd}>
               ADD TO CART
             </button>
