@@ -17,7 +17,7 @@ export const AddProduct = ({
   const [addedProduct, setAddedProduct] = useState({
     image: 'https://placehold.co/300x500',
     title: '',
-    price: 0,
+    price: 1,
     description: '',
     category: '',
   });
