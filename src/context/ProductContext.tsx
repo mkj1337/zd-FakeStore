@@ -98,9 +98,12 @@ export const ProductContextProvider = ({
         addedProduct,
       });
       console.log(data);
+      const highestId = products
+        .map((product) => product.id)
+        .sort((a, b) => b - a)[0];
       setProducts((prevProducts) => [
         ...prevProducts,
-        { id: products[products.length - 1].id + 1, ...addedProduct },
+        { id: highestId + 1, ...addedProduct },
       ]);
       toast.success('product has been added to the databese!');
     } catch (err) {
