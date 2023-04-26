@@ -59,7 +59,9 @@ export const ProductContextProvider = ({
         `https://fakestoreapi.com/products/${id}`
       );
       console.log(data);
-      setProducts(products.filter((product) => product.id !== id));
+      setProducts((prevProducts) => {
+        return prevProducts.filter((prevProduct) => prevProduct.id !== id);
+      });
       toast.info('Product has been deleted from the database!');
     } catch (err) {
       console.log(err);
