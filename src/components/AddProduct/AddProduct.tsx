@@ -15,7 +15,7 @@ export const AddProduct = ({
   createProduct,
 }: AddProductProps) => {
   const [addedProduct, setAddedProduct] = useState({
-    image: 'https://picsum.photos/200/300',
+    image: 'https://placehold.co/300x500',
     title: '',
     price: 0,
     description: '',
