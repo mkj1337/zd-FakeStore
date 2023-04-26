@@ -1,8 +1,5 @@
-import { addedProductProps, editedProductProps } from '../../types';
+import { addedProductProps } from '../../types';
 import { ChangeEvent, useRef, useState } from 'react';
-
-// styles
-import './AddProduct.scss';
 
 // icons
 import { VscChromeClose } from 'react-icons/vsc';

@@ -80,7 +80,6 @@
                 img {
                  width: 100%;
                 }
-          
             }
           #placeholder {
               display: none;
@@ -90,6 +89,17 @@
       td {
         text-align: center;
         padding: 10px;
+
+        input[type="text"],
+        input[type="number"] {
+            padding: 5px 10px; 
+        }
+        
+        textarea {
+            width: 300px;
+            height: 100px;
+            resize: none;
+        }
     }
     }
         
