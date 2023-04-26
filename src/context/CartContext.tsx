@@ -1,28 +1,29 @@
 import { useState, useContext, createContext, useEffect } from 'react';
 import { toast } from 'react-toastify';
+import { useProductContext } from './ProductContext';
 
 type CartContextProviderProps = {
   children: React.ReactNode;
 };
 
-type increaseQuantityProps = {
+interface increaseQuantityProps {
   id: number;
   image: string;
   title: string;
   price: number;
   description: string;
-};
+}
 
-type CartProduct = {
+interface CartProduct {
   id: number;
   quantity: number;
   image: string;
   title: string;
   description: string;
   price: number;
-};
+}
 
-type CardContextProps = {
+interface CardContextProps {
   increaseQuantity: ({
     id,
     image,
@@ -37,7 +38,7 @@ type CardContextProps = {
   cartProducts: CartProduct[];
   isOpen: boolean;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
+}
 
 export const CartContext = createContext({} as CardContextProps);
 
@@ -52,6 +53,7 @@ export const CartContextProvider = ({ children }: CartContextProviderProps) => {
       : []
   );
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { products } = useProductContext();
 
   const cartQuantity = cartProducts.reduce(
     (quantity, product) => quantity + product.quantity,
@@ -68,13 +70,7 @@ export const CartContextProvider = ({ children }: CartContextProviderProps) => {
     title,
     description,
     price,
-  }: {
-    id: number;
-    image: string;
-    title: string;
-    description: string;
-    price: number;
-  }) => {
+  }: increaseQuantityProps) => {
     setCartProducts((prevProducts) => {
       if (prevProducts.find((product) => product.id === id) == null) {
         return [
@@ -121,6 +117,15 @@ export const CartContextProvider = ({ children }: CartContextProviderProps) => {
   useEffect(() => {
     localStorage.setItem('cartProducts', JSON.stringify(cartProducts));
   }, [cartProducts]);
+
+  useEffect(() => {
+    const p = products.map((product) => product.id);
+    setCartProducts((prevProducts) => {
+      return prevProducts.filter((prevProduct) => {
+        return p.includes(prevProduct.id);
+      });
+    });
+  }, [products]);
 
   return (
     <CartContext.Provider
