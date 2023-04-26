@@ -111,7 +111,6 @@ export const ProductContextProvider = ({
     window.location.reload();
   };
 
-
   return (
     <ProductContext.Provider
       value={{

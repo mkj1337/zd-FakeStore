@@ -80,7 +80,7 @@ export const EditModal = ({
       </td>
       <td>
         <input
-          type="text"
+          type="number"
           name="price"
           value={editedProduct.price}
           onChange={(e) => changeHandler(e)}

@@ -1,47 +1,48 @@
-import { addedProductProps, editedProductProps } from '../../types';
 import { ChangeEvent, useRef, useState } from 'react';
+import { ProductProps, editedProductProps } from '../../types';
 
 // styles
-import './AddProduct.scss';
+import './EditProduct.scss';
 
 // icons
 import { VscChromeClose } from 'react-icons/vsc';
 import { FiSave } from 'react-icons/fi';
 
-interface AddProductProps {
-  setIsAddActive: React.Dispatch<React.SetStateAction<boolean>>;
-  createProduct: (addedProduct: addedProductProps) => void;
+interface EditProps {
+  product: ProductProps;
+  setIsEdited: React.Dispatch<React.SetStateAction<boolean>>;
+  updateProduct: (editedProduct: editedProductProps) => void;
 }
 
-export const AddProduct = ({
-  setIsAddActive,
-  createProduct,
-}: AddProductProps) => {
-  const [addedProduct, setAddedProduct] = useState({
-    image: 'https://picsum.photos/200/300',
-    title: '',
-    price: 0,
-    description: '',
-    category: '',
+export const EditProduct = ({
+  product,
+  setIsEdited,
+  updateProduct,
+}: EditProps) => {
+  const [editedProduct, setEditeProduct] = useState({
+    id: product.id,
+    image: product.image,
+    title: product.title,
+    price: product.price,
+    description: product.description,
   });
   const inputRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
 
   const changeHandler = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setAddedProduct({ ...addedProduct, [e.target.name]: e.target.value });
+    setEditeProduct({ ...editedProduct, [e.target.name]: e.target.value });
   };
 
-  const handleCreate = (addedProduct: addedProductProps) => {
+  const handleUpdate = (editedProduct: editedProductProps) => {
     if (
-      addedProduct.title.length > 0 &&
-      addedProduct.description.length > 0 &&
-      addedProduct.price > 0
+      editedProduct.title.length > 0 &&
+      editedProduct.description.length > 0 &&
+      editedProduct.price > 0
     ) {
-      createProduct(addedProduct);
-      setIsAddActive(false);
-    } else {
+      updateProduct(editedProduct);
+      setIsEdited(false);
     }
   };
 
@@ -54,14 +55,11 @@ export const AddProduct = ({
   };
 
   return (
-    <tr>
-      <td>#</td>
+    <>
+      <td>{product.id}</td>
       <td className="product__image">
         <label htmlFor="placeholder">
-          <img
-            src={preview ? preview : 'https://placehold.co/600x400'}
-            alt={addedProduct.title}
-          />
+          <img src={preview ? preview : product.image} alt={product.title} />
         </label>
         <input
           type="file"
@@ -75,7 +73,7 @@ export const AddProduct = ({
         <input
           type="text"
           name="title"
-          value={addedProduct.title}
+          value={editedProduct.title}
           onChange={(e) => changeHandler(e)}
           required
         />
@@ -84,7 +82,7 @@ export const AddProduct = ({
         <input
           type="number"
           name="price"
-          value={addedProduct.price}
+          value={editedProduct.price}
           onChange={(e) => changeHandler(e)}
           required
         />
@@ -92,7 +90,7 @@ export const AddProduct = ({
       <td style={{ cursor: 'pointer' }}>
         <textarea
           name="description"
-          value={addedProduct.description}
+          value={editedProduct.description}
           onChange={(e) => changeHandler(e)}
           required
         ></textarea>
@@ -100,17 +98,17 @@ export const AddProduct = ({
       <td className="product__actions">
         <button
           className="product__actions-close"
-          onClick={() => setIsAddActive(false)}
+          onClick={() => setIsEdited(false)}
         >
           <VscChromeClose />
         </button>
         <button
           className="product__actions-update"
-          onClick={() => handleCreate(addedProduct)}
+          onClick={() => handleUpdate(editedProduct)}
         >
           <FiSave />
         </button>
       </td>
-    </tr>
+    </>
   );
 };

@@ -24,5 +24,4 @@ export interface addedProductProps {
   title: string;
   price: number;
   description: string;
-  category: string;
 }

@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import { EditModal } from '../Edit/Edit';
-import {
-  ProductProps,
-  addedProductProps,
-  editedProductProps,
-} from '../../types';
+import { EditProduct } from '../EditProduct/EditProduct';
+import { ProductProps, editedProductProps } from '../../types';
 
 // styles
 import './TableProduct.scss';
@@ -34,7 +30,7 @@ export const TableProduct = ({
     <>
       {isEdited ? (
         <tr className="table__product">
-          <EditModal
+          <EditProduct
             product={product}
             setIsEdited={setIsEdited}
             updateProduct={updateProduct}
